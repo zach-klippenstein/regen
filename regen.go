@@ -26,7 +26,7 @@ import (
 	"time"
 )
 
-var NumberOfGenerations = flag.Int("n", 1, "number of strings to generate.")
+var NumberOfGenerations = flag.Int("n", 1, "number of strings to generate. A value of 0 will keep generating strings until the process is killed.")
 
 func main() {
 	flag.Usage = func() {
@@ -51,7 +51,7 @@ func main() {
 		os.Exit(1)
 	}
 
-	for i := 0; i < *NumberOfGenerations; i++ {
+	for i := 0; *NumberOfGenerations == 0 || i < *NumberOfGenerations; i++ {
 		fmt.Println(generator.Generate())
 	}
 }
